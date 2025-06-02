@@ -1,0 +1,22 @@
+{
+  "name": "mi-api-aventura",
+  "version": "1.0.0",
+  "description": "Una api de prueba para realizar el ejercicio correspondiente al modulo 7 de backend",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ejercicio",
+    "escuela",
+    "musk",
+    "modulo",
+    "7"
+  ],
+  "author": "Guillermo Luna Alvarez",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
