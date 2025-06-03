@@ -1,3 +1,4 @@
 export default function handler(req, res) {
-  res.status(200).json({ mensaje: "¡API actualizada y mejorada!" });
+  const mensaje = process.env.MENSAJE_BIENVENIDA || "Mensaje por defecto cuando no leemos de la variable en .env";
+  res.status(200).json({ mensaje });
 }
