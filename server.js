@@ -5,7 +5,7 @@ const express = require('express');
 const app = express();
 
 // Define el puerto
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Ruta de ejemplo
 app.get('/', (req, res) => {
