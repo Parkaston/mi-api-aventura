@@ -1,17 +1,42 @@
 openapi: 3.0.0
 info:
   title: Mi API Aventura
-  description: API educativa con autenticación, MongoDB y despliegue.
-  version: 1.0.0
+  version: "1.0.0"
+  description: |
+    Esta es una API REST desarrollada como parte del Módulo 7 del curso de Escuela Musk.
+
+    💡 Características principales:
+    - Endpoint de saludo personalizado.
+    - Login con autenticación JWT.
+    - Rutas protegidas para listar y crear usuarios.
+    - Conexión con base de datos MongoDB Atlas.
+    - Documentación interactiva con Swagger.
+
+    🛠 Tecnologías utilizadas:
+    - Node.js
+    - Express
+    - MongoDB + Mongoose
+    - JSON Web Tokens (JWT)
+    - Swagger UI
+
+    📚 Para más información y cómo clonar el proyecto, consultá el README en GitHub:
+    https://github.com/Parkaston/mi-api-aventura
+
+  contact:
+    name: Guillermo Luna Álvarez
+    url: https://github.com/Parkaston
 
 servers:
   - url: https://mi-api-aventura.onrender.com
     description: Producción (Render)
+  - url: http://localhost:3000
+    description: Desarrollo local
 
 paths:
   /api/v1/saludo:
     get:
-      summary: Saludo personalizado
+      summary: Devuelve un saludo personalizado
+      description: Requiere un parámetro de consulta `nombre`.
       parameters:
         - name: nombre
           in: query
@@ -20,13 +45,18 @@ paths:
             type: string
       responses:
         '200':
-          description: Saludo generado
+          description: Respuesta exitosa
+          content:
+            application/json:
+              example:
+                mensaje: "Hola, Guille!"
         '400':
           description: Faltó el parámetro nombre
 
   /api/v1/login:
     post:
-      summary: Autenticación de usuario
+      summary: Genera un token JWT
+      description: Recibe username y password. Si son válidos, devuelve un token.
       requestBody:
         required: true
         content:
@@ -40,25 +70,36 @@ paths:
                   type: string
       responses:
         '200':
-          description: Devuelve un token JWT
+          description: Token generado correctamente
+          content:
+            application/json:
+              example:
+                token: "eyJhbGciOiJIUzI1NiIsInR..."
         '401':
           description: Credenciales inválidas
 
   /api/v1/usuarios:
     get:
-      summary: Obtener lista de usuarios (protegido con token)
+      summary: Obtiene la lista de usuarios (protegido)
       security:
         - bearerAuth: []
       responses:
         '200':
           description: Lista de usuarios
+          content:
+            application/json:
+              example:
+                - _id: "123abc"
+                  nombre: "Usuario1"
+                  email: "usuario1@example.com"
         '401':
           description: Token no proporcionado
         '403':
           description: Token inválido
 
     post:
-      summary: Crear un nuevo usuario
+      summary: Crea un nuevo usuario
+      description: No requiere token. Se puede proteger si se desea.
       requestBody:
         required: true
         content:
@@ -72,7 +113,14 @@ paths:
                   type: string
       responses:
         '201':
-          description: Usuario creado
+          description: Usuario creado correctamente
+          content:
+            application/json:
+              example:
+                mensaje: "Usuario creado correctamente"
+                usuario:
+                  nombre: "Usuario1"
+                  email: "usuario1@example.com"
         '400':
           description: Datos incompletos
 
