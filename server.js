@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
 // Middleware de autenticación con JWT
 function autenticarToken(req, res, next) {
   const authHeader = req.headers['authorization']; // Captura el header Authorization
-  const token = authHeader && authHeader.split(' ')[1]; // Extrae el token (formato: "Bearer token")
+  const token = authHeader && authHeader.split(' ')[1]; 
 
   if (!token) {
     return res.status(401).json({ error: 'Token no proporcionado' }); // Si no hay token, denegamos
