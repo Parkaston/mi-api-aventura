@@ -8,8 +8,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "engines": {
-  "node": "18.x"
-},
+    "node": "18.x"
+  },
   "keywords": [
     "ejercicio",
     "escuela",
@@ -20,7 +20,7 @@
   "author": "Guillermo Luna Alvarez",
   "license": "ISC",
   "dependencies": {
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "mongoose": "^8.15.1"
   }
-  
 }
