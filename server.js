@@ -1,8 +1,11 @@
 // Importamos los módulos necesarios
 const express = require('express');
-const connectDB = require('./db'); // Función para conectar a MongoDB
-const Usuario = require('./models/Usuario'); // Modelo de usuario (mongoose)
-const jwt = require('jsonwebtoken'); // Para generar y verificar tokens JWT
+const connectDB = require('./db'); 
+const Usuario = require('./models/Usuario'); 
+const jwt = require('jsonwebtoken'); 
+const swaggerUi = require('swagger-ui-express');
+const YAML = require('yamljs');
+const swaggerDocument = YAML.load('./swagger.yaml');
 
 const app = express();
 const PORT = process.env.PORT || 3000; // Puerto del servidor (usa variable de entorno o 3000 por defecto)
@@ -13,6 +16,8 @@ connectDB();
 // Middleware para parsear JSON en las peticiones
 app.use(express.json());
 
+//Middleware para poder usar Swagger y documentar la API
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 // Ruta base para probar que el servidor funciona
 app.get('/', (req, res) => {
   res.send('El server express funciona OK');
@@ -31,7 +36,8 @@ function autenticarToken(req, res, next) {
   // Verificamos el token con la clave secreta
   jwt.verify(token, process.env.JWT_SECRET, (err, usuario) => {
     if (err) {
-      return res.status(403).json({ error: 'Token inválido o expirado' }); // Si falla la verificación
+      return res.status(403).json({ error: 'Token inválido o expirado' }); //Manejamos errorse de verificacion
+
     }
 
     req.usuario = usuario; // Guardamos el usuario decodificado en la request
@@ -62,11 +68,10 @@ app.get('/api/v1/saludo', (req, res) => {
 app.post('/api/v1/login', (req, res) => {
   const { username, password } = req.body;
 
-  // Validación fija para este ejercicio (admin/1234)
+  // En este caso usamos unas credenciales fijas para el ejemplo
   if (username === 'admin' && password === '1234') {
     const token = jwt.sign({ username }, process.env.JWT_SECRET, {
-      expiresIn: '1h' // El token expira en 1 hora
-    });
+      expiresIn: '1h' // Seteamos el token para que expire en una hora
 
     return res.json({ token }); // Enviamos el token
   }
