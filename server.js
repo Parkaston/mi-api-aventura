@@ -44,3 +44,25 @@ app.get('/api/v1/usuarios', async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Servidor escuchando en http://localhost:${PORT}`);
 });
+
+app.post('/api/v1/usuarios', async (req, res) => {
+  try {
+    const { nombre, email } = req.body;
+
+    if (!nombre || !email) {
+      return res.status(400).json({
+        error: "Debe proporcionar 'nombre' y 'email'",
+      });
+    }
+
+    const nuevoUsuario = new Usuario({ nombre, email });
+    await nuevoUsuario.save();
+
+    res.status(201).json({
+      mensaje: "Usuario creado correctamente",
+      usuario: nuevoUsuario,
+    });
+  } catch (error) {
+    res.status(500).json({ error: 'Error al crear el usuario.' });
+  }
+});
