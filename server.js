@@ -5,10 +5,13 @@ const Usuario = require('./models/Usuario');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Conexión a la base de datos
+// Conectar a la base de datos
 connectDB();
 
-// Ruta raíz
+// Middleware para parsear JSON (por si hacés POST después)
+app.use(express.json());
+
+// Ruta base
 app.get('/', (req, res) => {
   res.send('El server express funciona OK');
 });
@@ -34,11 +37,10 @@ app.get('/api/v1/usuarios', async (req, res) => {
     const usuarios = await Usuario.find();
     res.status(200).json(usuarios);
   } catch (error) {
-    res.status(500).json({ error: "Error al obtener los usuarios." });
+    res.status(500).json({ error: 'Error al obtener los usuarios.' });
   }
 });
 
-// Iniciar servidor
 app.listen(PORT, () => {
   console.log(`Servidor escuchando en http://localhost:${PORT}`);
 });
