@@ -4,6 +4,24 @@
 
 ---
 
+### 📘 Documentación Interactiva con Swagger
+
+Hemos incorporado Swagger UI para que puedas explorar y probar los endpoints de la API directamente desde el navegador.
+
+🔗 Accedé a la documentación desde el siguiente enlace:
+
+https://mi-api-aventura.onrender.com/api-docs
+
+---
+
+🧪 Desde allí podrás:
+
+- Ver todos los endpoints disponibles.
+- Probar solicitudes GET y POST con parámetros.
+- Ingresar tokens JWT para acceder a rutas protegidas.
+- Consultar los modelos de datos y respuestas esperadas.
+
+
 ## 🚀 Enlaces en vivo
 
 🔹 **Vercel (modo serverless):**
