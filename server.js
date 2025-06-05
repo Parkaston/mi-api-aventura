@@ -8,7 +8,7 @@ const YAML = require('yamljs');
 const swaggerDocument = YAML.load('./swagger.yaml');
 
 const app = express();
-const PORT = process.env.PORT || 3000; // Puerto del servidor (usa variable de entorno o 3000 por defecto)
+const PORT = process.env.PORT || 3000; 
 
 // Conectamos a la base de datos MongoDB
 connectDB();
@@ -43,7 +43,7 @@ function autenticarToken(req, res, next) {
   });
 }
 
-// Endpoint con parámetros de consulta: saludo personalizado
+// Endpoint con parámetros de consulta que devuelve un saludo personalizado
 app.get('/api/v1/saludo', (req, res) => {
   const { nombre } = req.query;
 
@@ -67,7 +67,7 @@ app.post('/api/v1/login', (req, res) => {
       expiresIn: '1h'
     });
 
-    return res.json({ token }); // ✅ Ahora sí está bien cerrado
+    return res.json({ token }); 
   }
 
   res.status(401).json({ error: 'Credenciales inválidas' });
@@ -83,7 +83,7 @@ app.get('/api/v1/usuarios', autenticarToken, async (req, res) => {
   }
 });
 
-// Ruta para crear un nuevo usuario (no protegida por token)
+// Ruta para crear un nuevo usuario 
 app.post('/api/v1/usuarios', async (req, res) => {
   try {
     const { nombre, email } = req.body;
