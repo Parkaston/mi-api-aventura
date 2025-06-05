@@ -5,21 +5,21 @@ info:
   description: |
     Esta es una API REST desarrollada como parte del Módulo 7 del curso de Escuela Musk.
 
-    💡 Características principales:
+    Características principales:
     - Endpoint de saludo personalizado.
     - Login con autenticación JWT.
     - Rutas protegidas para listar y crear usuarios.
     - Conexión con base de datos MongoDB Atlas.
     - Documentación interactiva con Swagger.
 
-    🛠 Tecnologías utilizadas:
+    Tecnologías utilizadas:
     - Node.js
     - Express
     - MongoDB + Mongoose
     - JSON Web Tokens (JWT)
     - Swagger UI
 
-    📚 Para más información y cómo clonar el proyecto, consultá el README en GitHub:
+    Para más información y cómo clonar el proyecto, consultá el README en GitHub:
     https://github.com/Parkaston/mi-api-aventura
 
   contact:
